@@ -1,5 +1,4 @@
-# tp-teste-de-software
-# Trabalho Prático da Disciplina Testes de Software - DCC UFMG
+# Tracker+
 
 ## Grupo: Ana Luiza Macêdo dos Santos e Guilherme Mota Bromonschenkel Lima
 
