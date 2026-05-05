@@ -9,7 +9,9 @@ Sistema Web de Controle de Hábitos
 
 O sistema consiste em um rastreador de hábitos (Habit Tracker) desenvolvido como uma aplicação web simples, permitindo ao usuário cadastrar hábitos diários e acompanhar sua execução ao longo do tempo por meio de uma interface interativa. O usuário poderá marcar hábitos como concluídos em cada dia, visualizar sua lista de hábitos e acompanhar o progresso individual.
 
-O sistema também inclui o cálculo de sequência de dias consecutivos (streak), permitindo medir a consistência do usuário. O projeto tem como principal objetivo evidenciar a importância dos testes de software na validação das regras de negócio e na manutenção do sistema.
+Além disso, o sistema conta as seguintes funcionalidades adicionais:
+- Cálculo de sequência de dias consecutivos (streak), permitindo medir a consistência do usuário.
+- Sistema de pontuação gamificado estilo Gymrats para envolver interações entre usuários.
 
 ## Testes Possíveis
 
