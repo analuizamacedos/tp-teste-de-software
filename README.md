@@ -12,6 +12,7 @@ O sistema consiste em um rastreador de hábitos (Habit Tracker) desenvolvido com
 Além disso, o sistema conta as seguintes funcionalidades adicionais:
 - Cálculo de sequência de dias consecutivos (streak), permitindo medir a consistência do usuário.
 - Sistema de pontuação gamificado estilo Gymrats para envolver interações entre usuários.
+- Histórico de estatísticas, com premiações visuais.
 
 ## Testes Possíveis
 
