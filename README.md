@@ -39,8 +39,6 @@ Alguns testes que podem ser implementados neste projeto:
 
 ## Tecnologias Utilizadas
 
-- Python (backend com Flask)
-- HTML (estrutura da interface)
-- CSS (estilização da interface)
-- JavaScript (interação com o usuário)
+- Back-end: Python (Flask)
+- Front-end: ReactJS
 - Pytest (framework de teste)
