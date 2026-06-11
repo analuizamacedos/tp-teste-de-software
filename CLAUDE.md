@@ -368,6 +368,37 @@ Deletar um `Habit` remove automaticamente todos os `HabitLog`s e o `Score` assoc
 
 ---
 
+## Fluxo de PR por Task
+
+Ao concluir a implementação de qualquer task, abra um Pull Request **antes** de reportar a task como concluída.
+
+### Regras do PR
+
+- **Branch:** crie uma branch com o padrão `task/<id>-<slug>`, ex: `task/02-habit-model`.
+- **Título:** `[TASK-XX] Título resumido da task`.
+- **Body:** use o template abaixo, preenchendo com base na spec da task:
+
+```
+## O que foi implementado
+<bullet points do que foi feito — extraído diretamente da spec>
+
+## Decisões relevantes
+<qualquer escolha não óbvia feita durante a implementação>
+
+## Como testar
+<passos mínimos para verificar que a task funciona>
+
+## Checklist
+- [ ] pytest passa sem erros
+- [ ] cobertura ≥ 80%
+- [ ] npm run dev abre sem erros
+```
+
+- Nunca faça squash dos commits antes do PR ser revisado.
+- O PR deve ser aberto **mesmo que não haja reviewer** — serve como registro da spec implementada.
+
+---
+
 ## Checklist Antes de Considerar uma Task Concluída
 
 - [ ] `pytest` passa sem erros ou warnings inesperados
@@ -377,3 +408,4 @@ Deletar um `Habit` remove automaticamente todos os `HabitLog`s e o `Score` assoc
 - [ ] Todos os `data-testid` listados acima estão presentes no HTML renderizado
 - [ ] `npm run dev` abre sem erros no console do browser
 - [ ] `tracker.db` está no `.gitignore`
+- [ ] PR aberto com título `[TASK-XX] ...` e body seguindo o template da seção **Fluxo de PR por Task**
