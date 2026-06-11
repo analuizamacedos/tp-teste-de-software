@@ -17,6 +17,9 @@ def create_app(testing: bool = False) -> Flask:
     CORS(app)
     db.init_app(app)
 
+    with app.app_context():
+        from . import models  # noqa: F401
+
     from .routes import register_routes
     register_routes(app)
 
