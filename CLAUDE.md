@@ -241,6 +241,197 @@ Rodar `pytest --cov=app` deve resultar em cobertura ≥ 80%. Os services e model
 
 ---
 
+## Testes — Boas Práticas Avançadas
+
+Além de testar comportamento, os testes devem ser fáceis de entender, manter e evoluir. Código de produção deve ser projetado pensando em testabilidade: alta coesão, baixo acoplamento e responsabilidades bem separadas.
+
+### Design for Testability
+
+Ao criar código novo, prefira estruturas que permitam testar a lógica isoladamente.
+
+Regras:
+- Lógica de negócio deve ficar em funções/classes puras sempre que possível.
+- Código que depende de HTTP, banco, filesystem ou threads deve ser uma camada fina.
+- Se uma classe está difícil de testar, mova a lógica para uma unidade menor e testável.
+- Não escreva testes difíceis para compensar uma arquitetura difícil — melhore a separação do código.
+
+Exemplo:
+
+```python
+# CORRETO
+# service puro, fácil de testar
+def calculate_score(streak: int) -> int:
+    return 10 + (50 if streak >= 7 else 0)
+
+# ERRADO
+# mistura regra de negócio com infraestrutura
+def calculate_score(habit_id):
+    habit = Habit.query.get(habit_id)
+    ...
+```
+
+A lógica de domínio deve ser a principal candidata a testes unitários. Camadas externas (HTTP, banco, integração) devem ser cobertas por testes de integração.
+
+### Testes devem ser legíveis
+
+O nome do teste deve explicar o comportamento esperado, não apenas repetir o nome da função testada.
+
+```python
+# CORRETO
+def test_complete_habit_twice_same_day_returns_conflict():
+    ...
+
+# ERRADO
+def test_complete_habit():
+    ...
+```
+
+Um desenvolvedor deve conseguir entender o cenário do teste lendo seu nome.
+
+Prefira nomes no formato:
+```text
+test_<ação>_<condição>_<resultado>
+```
+
+Exemplos:
+```python
+test_create_habit_empty_name_returns_validation_error
+test_streak_breaks_after_missing_day
+test_complete_habit_duplicate_same_day_returns_409
+```
+
+### Estrutura dos testes
+
+Cada teste deve seguir:
+1. Preparação do cenário (Arrange)
+2. Execução da ação (Act)
+3. Verificação do resultado (Assert)
+
+Evite:
+* muitos asserts sem relação entre si;
+* lógica condicional dentro do teste;
+* loops ou cálculos para descobrir o resultado esperado.
+
+O teste deve ter uma intenção clara e falhar por um motivo específico.
+
+### Evitar Test Smells
+
+Testes também precisam de manutenção e refatoração. Sinais de problemas nos testes devem ser tratados como oportunidades de melhoria.
+
+#### Conditional Test Logic
+Não coloque `if`, `for`, `try/except` complexo ou lógica de decisão dentro de testes.
+
+```python
+# EVITAR
+def test_score():
+    if streak > 7:
+        assert score == 50
+    else:
+        assert score == 10
+```
+
+Crie testes separados para cada comportamento:
+```python
+test_score_with_seven_day_streak_returns_bonus
+test_score_without_bonus_returns_base_value
+```
+
+#### General Fixture
+Fixtures devem preparar somente o necessário para o teste.
+
+```python
+# EVITAR
+@pytest.fixture
+def habit_environment():
+    cria_10_habits()
+    cria_logs()
+    cria_scores()
+```
+
+Prefira fixtures pequenas e específicas:
+```python
+@pytest.fixture
+def habit(client):
+    return client.post(
+        "/habits",
+        json={"name": "Meditar"}
+    )
+```
+Fixtures genéricas deixam testes mais difíceis de entender e podem inicializar recursos que o teste nem usa.
+
+#### Mystery Guest
+Testes unitários não devem depender de arquivos, banco real ou recursos externos.
+
+Evite:
+```python
+def test_calculate_score():
+    carrega_dados_de_um_arquivo()
+    consulta_banco_real()
+```
+
+Prefira dados em memória:
+```python
+def test_calculate_score():
+    result = calculate_score(7)
+    assert result == 60
+```
+Dependências externas tornam testes mais lentos e instáveis.
+
+#### Redundant Print
+Não use `print()` permanente dentro de testes.
+Testes devem ser auto-verificáveis: o resultado deve ser determinado pelos asserts.
+
+```python
+# EVITAR
+def test_create_habit():
+    habit = create_habit()
+    print(habit)
+```
+
+#### Unknown Test
+Todo teste precisa validar algo. Nunca crie teste sem assert:
+
+```python
+# ERRADO
+def test_create():
+    service.create()
+```
+
+Correto:
+```python
+def test_create_habit_returns_created_habit():
+    habit = service.create("Meditar")
+    assert habit.name == "Meditar"
+```
+
+### DAMP nos testes
+
+Em testes, clareza é mais importante que evitar toda repetição (DRY).
+Não force abstrações excessivas apenas para remover linhas duplicadas.
+
+Prefira:
+```python
+def test_create_habit_with_valid_name():
+    ...
+
+def test_create_habit_with_empty_name_returns_error():
+    ...
+```
+Mesmo com alguma repetição, cada teste deve explicar claramente seu cenário.
+
+### Checklist adicional de qualidade dos testes
+
+Antes de adicionar ou alterar testes:
+* [ ] O nome do teste explica o comportamento?
+* [ ] O teste falha por apenas um motivo?
+* [ ] Existe pelo menos um assert relevante?
+* [ ] O teste evita dependências externas desnecessárias?
+* [ ] A fixture prepara somente o necessário?
+* [ ] A lógica testada deveria estar em um service/model mais simples?
+* [ ] O teste continua fácil de entender sem abrir a implementação?
+
+---
+
 ## Frontend — Convenções React
 
 ### Toda comunicação com API passa por `api.js`
