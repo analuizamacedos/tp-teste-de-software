@@ -1,0 +1,11 @@
+[run]
+source = app
+omit =
+    tests/*
+    run.py
+
+[report]
+show_missing = true
+
+[xml]
+output = coverage.xml
