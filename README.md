@@ -46,7 +46,7 @@ Alguns testes que podem ser implementados neste projeto:
 
 O desenvolvimento dessa aplicação contou com o auxílio de IA como recurso de apoio ao processo de análise, planejamento, implementação e revisão. A utilização da IA seguiu práticas para garantir qualidade, rastreabilidade e validação das decisões tomadas durante o desenvolvimento.
 
-A abordagem adotada foi baseada em **Spec-Driven Design**, na qual o desenvolvimento foi dividido em especificações menores e bem definidas. Essas especificações serviram como direcionamento para a implementação das funcionalidades, permitindo que cada etapa fosse desenvolvida, revisada e validada individualmente.
+A abordagem adotada foi baseada em **Spec-Driven Development**, na qual o desenvolvimento foi dividido em especificações menores e bem definidas. Essas especificações serviram como direcionamento para a implementação das funcionalidades, permitindo que cada etapa fosse desenvolvida, revisada e validada individualmente.
 
 As especificações utilizadas foram:
 
@@ -64,8 +64,4 @@ As especificações utilizadas foram:
 
 - **[SPEC-07](./.specs/spec-7.md):** Criação dos testes automatizados para validar o funcionamento completo da aplicação simulando a utilização real por um usuário.
 
-Além da criação inicial das especificações, houve validação humana de todos os artefatos gerados pela IA, permitindo corrigir inconsistências, melhorar requisitos e ajustar decisões técnicas conforme as necessidades do projeto.
-
-A implementação foi realizada de forma incremental e supervisionada, executando cada especificação individualmente e validando as alterações realizadas pela IA, tanto em relação ao código desenvolvido quanto ao atendimento dos requisitos definidos.
-
-Dessa forma, a IA foi utilizada como ferramenta de apoio à produtividade e organização do desenvolvimento, mantendo a análise crítica, revisão e tomada de decisões sob responsabilidade humana.
+A implementação foi realizada de forma incremental e supervisionada, executando cada especificação individualmente. Durante esse processo, os artefatos gerados pela IA foram revisados e validados humanamente, com atenção especial aos testes automatizados, que foram analisados conforme as boas práticas de testes abordadas em sala de aula.
