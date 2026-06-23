@@ -74,28 +74,3 @@ def delete_habit(habit_id):
     return jsonify({"message": "Habit deleted"}), 200
 
 
-@habits_bp.route("/habits/<int:habit_id>/complete", methods=["POST"])
-def complete_habit(habit_id):
-    habit = db.session.get(Habit, habit_id)
-    if not habit:
-        return jsonify({"error": "Habit not found"}), 404
-
-    today = date.today()
-    existing_log = HabitLog.query.filter_by(habit_id=habit_id, date=today).first()
-    if existing_log:
-        return jsonify({"error": "Habit already completed today"}), 409
-
-    log = HabitLog(habit_id=habit_id, date=today, completed=True)
-    db.session.add(log)
-    db.session.commit()
-    return jsonify(log.to_dict()), 201
-
-
-@habits_bp.route("/habits/<int:habit_id>/logs", methods=["GET"])
-def get_logs(habit_id):
-    habit = db.session.get(Habit, habit_id)
-    if not habit:
-        return jsonify({"error": "Habit not found"}), 404
-
-    logs = HabitLog.query.filter_by(habit_id=habit_id).all()
-    return jsonify([log.to_dict() for log in logs]), 200
