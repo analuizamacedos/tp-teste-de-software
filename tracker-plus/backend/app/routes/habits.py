@@ -74,3 +74,14 @@ def delete_habit(habit_id):
     return jsonify({"message": "Habit deleted"}), 200
 
 
+@habits_bp.route("/test/reset", methods=["DELETE"])
+def reset_db():
+    from app.models import HabitLog, Score, Habit
+
+    db.session.query(HabitLog).delete()
+    db.session.query(Score).delete()
+    db.session.query(Habit).delete()
+    db.session.commit()
+    return jsonify({"message": "Database reset"}), 200
+
+
