@@ -55,7 +55,7 @@ cd tracker-plus/backend
 python run.py
 ```
 
-O backend ficará disponível em `http://localhost:5000`.
+O backend ficará disponível em `http://localhost:4321`.
 
 ### Rodar o frontend
 

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-const backendBase = 'http://localhost:5000'
+const backendBase = 'http://localhost:4321'
 
 test.beforeEach(async ({ request }) => {
   await request.delete(`${backendBase}/test/reset`)

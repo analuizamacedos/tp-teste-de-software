@@ -128,7 +128,7 @@ app = create_app()
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=4321)
 ```
 
 ### `backend/tests/conftest.py`
@@ -193,8 +193,8 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/habits': 'http://localhost:5000',
-      '/leaderboard': 'http://localhost:5000',
+      '/habits': 'http://localhost:4321',
+      '/leaderboard': 'http://localhost:4321',
     }
   }
 })

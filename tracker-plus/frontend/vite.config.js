@@ -6,8 +6,8 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/habits': 'http://localhost:5000',
-      '/leaderboard': 'http://localhost:5000',
+      '/habits': 'http://localhost:4321',
+      '/leaderboard': 'http://localhost:4321',
     }
   }
 })

@@ -13,7 +13,7 @@ Configurar o Playwright e implementar os 5 testes E2E que simulam o fluxo comple
 
 ## Pré-requisitos
 
-- Backend rodando em `http://localhost:5000`
+- Backend rodando em `http://localhost:4321`
 - Frontend rodando em `http://localhost:5173`
 - Todos os `data-testid` da TASK-05 presentes no HTML
 
@@ -44,7 +44,7 @@ export default defineConfig({
   webServer: [
     {
       command: 'cd ../backend && python run.py',
-      url: 'http://localhost:5000/habits',
+      url: 'http://localhost:4321/habits',
       reuseExistingServer: true,
       timeout: 10_000,
     },
@@ -85,7 +85,7 @@ def reset_db():
 import { test, expect } from '@playwright/test'
 
 test.beforeEach(async ({ request }) => {
-  await request.delete('http://localhost:5000/test/reset')
+  await request.delete('http://localhost:4321/test/reset')
 })
 ```
 

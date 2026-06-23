@@ -42,7 +42,7 @@ tracker-plus/
 # Backend
 cd backend
 pip install -r requirements.txt
-python run.py                          # inicia em localhost:5000
+python run.py                          # inicia em localhost:4321
 
 # Testes backend
 pytest                                 # todos os testes
@@ -498,14 +498,14 @@ if (error) return <p>{error}</p>
 
 ### Proxy do Vite
 
-O `vite.config.js` já está configurado com proxy para `/habits` e `/leaderboard` apontando para `localhost:5000`. Não adicione o host base nas chamadas do `api.js`:
+O `vite.config.js` já está configurado com proxy para `/habits` e `/leaderboard` apontando para `localhost:4321`. Não adicione o host base nas chamadas do `api.js`:
 
 ```js
 // CORRETO
 fetch('/habits')
 
 // ERRADO
-fetch('http://localhost:5000/habits')
+fetch('http://localhost:4321/habits')
 ```
 
 ---

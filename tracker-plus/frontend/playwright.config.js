@@ -10,7 +10,7 @@ export default defineConfig({
   webServer: [
     {
       command: 'cd ../backend && python run.py',
-      url: 'http://localhost:5000/habits',
+      url: 'http://localhost:4321/habits',
       reuseExistingServer: true,
       timeout: 10_000,
     },
