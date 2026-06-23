@@ -17,6 +17,10 @@ class Habit(db.Model):
     def __init__(self, name: str, description: str = ""):
         if not name or not name.strip():
             raise ValueError("Habit name cannot be empty")
+        if len(name.strip()) > 120:
+            raise ValueError("Habit name is too long")
+        if len(description) > 300:
+            raise ValueError("Habit description is too long")
         self.name = name.strip()
         self.description = description
         self.created_at = datetime.utcnow()
@@ -38,6 +42,15 @@ class HabitLog(db.Model):
     habit_id = db.Column(db.Integer, db.ForeignKey("habit.id"), nullable=False)
     date = db.Column(db.Date, nullable=False)
     completed = db.Column(db.Boolean, default=True)
+
+    def __init__(self, habit_id, date, completed=True):
+        if habit_id is None:
+            raise ValueError("habit_id is required")
+        if date is None:
+            raise ValueError("date is required")
+        self.habit_id = habit_id
+        self.date = date
+        self.completed = completed
 
     def to_dict(self):
         return {

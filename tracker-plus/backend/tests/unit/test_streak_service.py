@@ -38,6 +38,10 @@ def test_current_streak_unordered_input_returns_correct_count():
     assert calculate_current_streak(logs) == 3
 
 
+def test_current_streak_with_today_and_yesterday_returns_2():
+    assert calculate_current_streak([days_ago(1), days_ago(0)]) == 2
+
+
 def test_max_streak_empty_logs_returns_0():
     assert calculate_max_streak([]) == 0
 

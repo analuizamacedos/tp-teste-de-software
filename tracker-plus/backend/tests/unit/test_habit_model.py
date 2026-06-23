@@ -34,3 +34,20 @@ def test_habit_to_dict_contains_all_required_keys():
     assert "name" in result
     assert "description" in result
     assert "created_at" in result
+
+
+def test_habit_create_name_exceeding_120_chars_raises_value_error():
+    with pytest.raises(ValueError):
+        Habit(name="x" * 121)
+
+
+def test_habit_create_strips_leading_trailing_whitespace_from_name():
+    habit = Habit(name="  Correr  ")
+    assert habit.name == "Correr"
+
+
+def test_habit_to_dict_created_at_is_iso_format_string():
+    habit = Habit(name="Ler")
+    created_at = habit.to_dict()["created_at"]
+    assert isinstance(created_at, str)
+    assert "T" in created_at
