@@ -10,51 +10,51 @@ def days_ago(n):
     return today() - timedelta(days=n)
 
 
-def test_streak_empty_logs():
+def test_current_streak_empty_logs_returns_0():
     assert calculate_current_streak([]) == 0
 
 
-def test_streak_only_today():
+def test_current_streak_only_today_returns_1():
     assert calculate_current_streak([today()]) == 1
 
 
-def test_streak_consecutive_5_days():
+def test_current_streak_5_consecutive_days_returns_5():
     logs = [days_ago(4), days_ago(3), days_ago(2), days_ago(1), today()]
     assert calculate_current_streak(logs) == 5
 
 
-def test_streak_reset_on_gap():
-    # days_ago(5) e days_ago(4) formam um bloco, days_ago(1) e today() formam outro
+def test_current_streak_gap_in_logs_returns_recent_block_count():
     logs = [days_ago(5), days_ago(4), days_ago(1), today()]
     assert calculate_current_streak(logs) == 2
 
 
-def test_streak_not_including_today():
-    # Opção B: ontem é ponto de partida válido — streak ainda "vivo"
+def test_current_streak_ending_yesterday_returns_streak_count():
     logs = [days_ago(3), days_ago(2), days_ago(1)]
     assert calculate_current_streak(logs) == 3
 
 
-def test_streak_unordered_input():
+def test_current_streak_unordered_input_returns_correct_count():
     logs = [today(), days_ago(2), days_ago(1)]
     assert calculate_current_streak(logs) == 3
 
 
-def test_max_streak_empty():
+def test_max_streak_empty_logs_returns_0():
     assert calculate_max_streak([]) == 0
 
 
-def test_max_streak_single():
+def test_max_streak_single_day_returns_1():
     assert calculate_max_streak([days_ago(0)]) == 1
 
 
-def test_max_streak_with_gap():
-    # bloco de 3 + bloco de 7
-    block_a = [days_ago(20 + i) for i in range(3)]
-    block_b = [days_ago(5 + i) for i in range(7)]
+def test_max_streak_two_blocks_returns_longer_block_length():
+    block_a = [days_ago(22), days_ago(21), days_ago(20)]
+    block_b = [days_ago(11), days_ago(10), days_ago(9), days_ago(8), days_ago(7), days_ago(6), days_ago(5)]
     assert calculate_max_streak(block_a + block_b) == 7
 
 
-def test_max_streak_all_consecutive():
-    logs = [days_ago(9 - i) for i in range(10)]
+def test_max_streak_all_consecutive_returns_total_count():
+    logs = [
+        days_ago(9), days_ago(8), days_ago(7), days_ago(6), days_ago(5),
+        days_ago(4), days_ago(3), days_ago(2), days_ago(1), days_ago(0),
+    ]
     assert calculate_max_streak(logs) == 10
