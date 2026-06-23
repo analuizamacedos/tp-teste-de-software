@@ -1,46 +1,97 @@
 # Tracker+
 
-## Grupo: Ana Luiza Macêdo dos Santos e Guilherme Mota Bromonschenkel Lima
+## Grupo
 
-## Explicação do Sistema
+Ana Luiza Macêdo dos Santos e Guilherme Mota Bromonschenkel Lima
 
-Sistema Web de Controle de Hábitos
+## Visão geral
 
-O sistema consiste em um rastreador de hábitos (Habit Tracker) desenvolvido como uma aplicação web simples, permitindo ao usuário cadastrar hábitos diários e acompanhar sua execução ao longo do tempo por meio de uma interface interativa. O usuário poderá marcar hábitos como concluídos em cada dia, visualizar sua lista de hábitos e acompanhar o progresso individual.
+Tracker+ é um sistema web de controle de hábitos. O usuário pode cadastrar hábitos diários, marcar conclusão e acompanhar o progresso por meio de uma interface simples.
 
-Além disso, o sistema conta as seguintes funcionalidades adicionais:
-- Cálculo de sequência de dias consecutivos (streak), permitindo medir a consistência do usuário.
-- Sistema de pontuação gamificado estilo Gymrats para envolver interações entre usuários.
-- Histórico de estatísticas, com premiações visuais.
+O sistema oferece:
 
-## Testes Possíveis
+- criação e listagem de hábitos
+- marcação de conclusão diária
+- cálculo de streaks (dias consecutivos)
+- pontuação baseada em streaks
+- leaderboard de hábitos concluídos
 
-Alguns testes que podem ser implementados neste projeto:
+## Tecnologias utilizadas
 
-### Testes Unitários
+- Back-end: Python, Flask
+- Front-end: ReactJS, Vite
+- Banco de dados: SQLite
+- Testes: Pytest, Playwright
 
-- Verificar se um hábito é criado corretamente.
-- Verificar se o nome do hábito não pode ser vazio.
-- Verificar se o cálculo de *streak* está correto.
-- Verificar se o *streak* é reiniciado quando há falha em um dia.
-- Verificar se um hábito pode ser marcado como concluído.
-- Verificar se um hábito não deve ser concluído duas vezes no mesmo dia.
+## Estrutura do projeto
 
-### Testes de Integração
+- `tracker-plus/backend/` - código do servidor Flask e testes backend
+- `tracker-plus/frontend/` - aplicação React e testes E2E com Playwright
+- `.specs/` - especificações de desenvolvimento do projeto
 
-- Verificar se o cadastro de hábito é salvo corretamente pelo backend.
-- Verificar se a listagem de hábitos retorna os dados cadastrados.
+## Instalação
 
-### Testes End-to-End
+### Back-end
 
-- Simular o fluxo completo: criar hábito → marcar como concluído → visualizar progresso.
-- Verificar se o usuário consegue interagir com a interface sem erros.
+```bash
+cd tracker-plus/backend
+pip install -r requirements.txt
+```
 
-## Tecnologias Utilizadas
+### Front-end
 
-- Back-end: Python (Flask)
-- Front-end: ReactJS
-- Pytest (framework de teste)
+```bash
+cd tracker-plus/frontend
+npm install
+npx playwright install chromium
+```
+
+## Execução
+
+### Rodar o backend
+
+```bash
+cd tracker-plus/backend
+python run.py
+```
+
+O backend ficará disponível em `http://localhost:5000`.
+
+### Rodar o frontend
+
+```bash
+cd tracker-plus/frontend
+npm run dev
+```
+
+O frontend ficará disponível em `http://localhost:5173`.
+
+## Testes
+
+### Testes backend
+
+```bash
+cd tracker-plus/backend
+python -m pytest tests/
+```
+
+### Testes E2E
+
+```bash
+cd tracker-plus/frontend
+npm run test:e2e
+```
+
+### Cobertura de testes
+
+Para gerar um relatório de cobertura do backend, execute:
+
+```bash
+cd tracker-plus/backend
+python -m pytest --cov=app --cov-report=term tests/
+```
+
+O comando mostra o percentual de cobertura no terminal e permite gerar um relatório HTML adicional com `--cov-report=html`.
 
 ## Uso de IA
 
